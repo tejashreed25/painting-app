@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Painting with Eraser</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+        .toolbar {
+            margin-bottom: 10px;
+        }
+        body{
+            background-color: rgba(218, 192, 243, 0.911);
+        }
+    </style>
+</head>
+<body>
+   <a href="../Paint-App-main/index.html">Back to home page</a><br><br>
+    <div class="toolbar">
+        <label for="color">Color:</label>
+        <input type="color" id="color" value="#000000">
+        <button id="draw">Draw</button>
+        <button id="erase">Erase</button>
+        <label for="size">Brush/Eraser Size:</label>
+        <input type="number" id="size" value="10" min="1" max="50">
+    </div>
+    <canvas id="paintCanvas" width="1480" height="640"></canvas>
+
+    <script>
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        let painting = false;
+        let isEraser = false;
+        let brushSize = 10;
+        let currentColor = '#000000'; // Default drawing color
+        const backgroundColor = '#ffffff'; // Background color of the canvas
+
+        // Initialize the canvas with a background color
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Start drawing or erasing
+        function startPainting(e) {
+            painting = true;
+            draw(e);
+        }
+
+        // Stop drawing or erasing
+        function stopPainting() {
+            painting = false;
+            ctx.beginPath(); // Reset the path
+        }
+
+        // Draw or erase
+        function draw(e) {
+            if (!painting) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = isEraser ? backgroundColor : currentColor;
+
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        // Event listeners for mouse actions
+        canvas.addEventListener('mousedown', startPainting);
+        canvas.addEventListener('mouseup', stopPainting);
+        canvas.addEventListener('mousemove', draw);
+
+        // Handle color change
+        document.getElementById('color').addEventListener('input', (e) => {
+            currentColor = e.target.value;
+        });
+
+        // Switch to draw mode
+        document.getElementById('draw').addEventListener('click', () => {
+            isEraser = false;
+        });
+
+        // Switch to erase mode
+        document.getElementById('erase').addEventListener('click', () => {
+            isEraser = true;
+        });
+
+        // Adjust brush/eraser size
+        document.getElementById('size').addEventListener('input', (e) => {
+            brushSize = e.target.value;
+        });
+    </script>
+</body>
+</html>

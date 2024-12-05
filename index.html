@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('../Paint-App-main/background.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333; /* Dark gray text */
+        }
+        p {
+            color: #555; /* Medium gray text */
+        }
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .top-right a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #fff; /* Optional background for better visibility */
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem; /* Responsive font size */
+        }
+        .top-right a:hover {
+            background-color: #ddd;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-right {
+                top: 5px;
+                right: 5px;
+                gap: 5px;
+            }
+            .top-right a {
+                padding: 5px;
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .top-right {
+                top: 5px;
+                right: 5px;
+                flex-direction: row;
+                gap: 5px;
+            }
+            .top-right a {
+                font-size: 0.8rem;
+                padding: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-right">
+        <a href="../Paint-App-main/draw.html">Let's Draw</a>
+        <a href="../Paint-App-main/about.html">Gallery</a>
+    </div>
+</body>
+</html>
